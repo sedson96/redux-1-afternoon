@@ -1,13 +1,23 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import store, { UPDATE_RECIPES, UPDATE_INSTRUCTIONS } from "../../store";
 
 class Instructions extends Component {
   constructor(props) {
     super(props);
+    let globalState = store.getState()
     this.state = {
-      instructions: [],
+      instructions: globalState.instructions,
       input: ""
     };
+  }
+  componentDidMount() {
+    store.subscribe(() => {
+      let globalState = store.getState()
+      this.setState({
+        instructions: globalState.instructions
+      })
+    })
   }
   handleChange(val) {
     this.setState({
@@ -16,12 +26,20 @@ class Instructions extends Component {
   }
   addInstruction() {
     // Send data to Redux state
+    store.dispatch({
+      payload: this.state.input,
+      type: UPDATE_INSTRUCTIONS
+    })
+    
     this.setState({
       input: ""
     });
   }
   create() {
     // Create new recipe in Redux state
+    store.dispatch({
+      type: UPDATE_RECIPES
+    })
   }
   render() {
     const instructions = this.state.instructions.map((instruction, i) => {
