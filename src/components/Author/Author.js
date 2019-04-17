@@ -8,8 +8,8 @@ class Author extends Component {
     super(props);
     const globalState = store.getState()
     this.state = {
-      authorFirst: globalState.authorFirstName,
-      authorLast: globalState.authorLastName
+      authorFirst: globalState.authorFirst,
+      authorLast: globalState.authorLast
     };
   }
 

@@ -34,6 +34,7 @@ let RecipeCard = props => {
         <ol className="list">{instructionsDisplay}</ol>
       </div>
       <svg
+        onClick={() => props.delete(name)}
         className="delete"
         width="60"
         height="60"

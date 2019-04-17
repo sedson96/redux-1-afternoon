@@ -26,11 +26,11 @@ class Name extends Component {
   saveChanges() {
     // Send data to Redux state
     store.dispatch({
-      paylaod: this.state.name,
+      payload: this.state.name,
       type: UPDATE_NAME
     })
     store.dispatch({
-      paylaod: this.state.category,
+      payload: this.state.category,
       type: UPDATE_CATEGORY
     })
   }

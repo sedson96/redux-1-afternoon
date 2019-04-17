@@ -3,8 +3,8 @@ import { createStore } from "redux";
 let initialState = {
     name: "",
     category: "",
-    authorFirstName: "",
-    authorLastName: "",
+    authorFirst: "",
+    authorLast: "",
     ingredients: [],
     instructions: [],
     recipes: []
@@ -17,6 +17,7 @@ export const UPDATE_AUTHOR_LAST_NAME = "UPDATE_AUTHOR_LAST_NAME"
 export const UPDATE_INGREDIENTS = "UPDATE_INGREDIENTS"
 export const UPDATE_INSTRUCTIONS = "UPDATE_INSTRUCTIONS"
 export const UPDATE_RECIPES = "UPDATE_RECIPES"
+export const DELETE_RECIPE = "DELETE_RECIPE"
 
 
 function reducer(state=initialState, action) {
@@ -34,12 +35,12 @@ function reducer(state=initialState, action) {
         case UPDATE_AUTHOR_FIRST_NAME: 
         return {
             ...state,
-            authorFirstName: action.payload
+            authorFirst: action.payload
         }
         case UPDATE_AUTHOR_LAST_NAME: 
         return {
             ...state,
-            authorLastName: action.payload
+            authorLast: action.payload
         }
         case UPDATE_INGREDIENTS:
         let newList = [...state.ingredients,action.payload]
@@ -75,8 +76,14 @@ function reducer(state=initialState, action) {
       };
       let newRecipes = [...state.recipes,recipe]
       return {
-          ...state,
+          ...initialState,
           recipes: newRecipes
+      }
+      case DELETE_RECIPE:
+      let newRecipesList = state.recipes.filter((recipe) => recipe !== action.payload)
+      return {
+          ...state,
+          recipes: newRecipesList
       }
         default: return state
     }
